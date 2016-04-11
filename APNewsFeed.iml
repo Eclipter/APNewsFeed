@@ -32,5 +32,9 @@
     <orderEntry type="library" name="AppEngine API" level="project" />
     <orderEntry type="library" name="Spring MVC-4.2.5.RELEASE" level="project" />
     <orderEntry type="library" name="javaee-api-7.0" level="project" />
+    <orderEntry type="library" name="com.google.appengine.tools:appengine-gcs-client:0.5" level="project" />
+    <orderEntry type="library" name="mysql-connector-java-5.1.38-bin" level="project" />
+    <orderEntry type="library" name="org.hibernate:hibernate-entitymanager:5.1.0.Final" level="project" />
+    <orderEntry type="library" name="org.springframework.data:spring-data-jpa:1.10.1.RELEASE" level="project" />
   </component>
 </module>
