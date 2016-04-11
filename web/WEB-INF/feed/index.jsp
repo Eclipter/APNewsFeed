@@ -13,5 +13,6 @@
   <body>
   <h1>GAE + Spring Example</h1>
   <h3>${message}</h3>
+  <h3>Message from db: ${imagePath}</h3>
   </body>
 </html>
