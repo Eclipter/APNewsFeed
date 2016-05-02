@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "newsfeedforhybridcloud",
+  "private_key_id": "7e0946ab6fb16f599ce86098060006f2a8e4e74f",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCSEmMerGus8x4k\nhNPhRfBrfm9ljATkq61K++j6jWArZwagm7UDQa4sJrzUNFRSSyfwS3BBCb0rap81\nVXHXHmblrlCJnDbZ7JizypvvqHqnyKCGCOJYZoQfGsHJNZ0Sp/PZmA3DQaGj0YxR\n7hbSLEYwfGIpUFQznx+PBfuFKFemVa15HOe1m2ihY8/a/wuBRBkO7YrKzqxaVU/l\nkC+lNbhHhjajufyz4o16liC91mrNGmVeTb41r2NlitMcQdEOAWME8GVIKpwU1VHc\nUIkM/+jWLX2tG8zA+WcLJCv5LOMQpE2cIvjY1jZ7s6OOVUZ9kmq+gRJgcLAonnqi\nfRSgYNK3AgMBAAECggEAGplaj1Vabi3/SSse4iC4PPrTEizDH1jbv5HLxQRFhOHH\n5Ss1dRhavRN4wzOcPzgMV8eE83LwjZ1mzHF4v3F7z0tEwyo9GsXosKSubJ/DZhY0\nlPO9M9fHK1rV+uvWZHVNBEyaBPpIkuovoSO36CHDzkR4I4nLK3NIbeTq/j5wZ4tf\nFiR+Jb+9idOiKF9bYJHUAFNVXTCCrTRQzLgn5drTvLf8S1+p+ZVw0GqsAcUO64oe\n5L81sRtjsio38/v1VNpvz4OJLIFuh4BCrd/mCJoVmnlIwFBDPfBcxvNCUYF4+UdF\nHVzDb6X3rUzhiJ/2/6iepBUXFOxCQYX9xEA7Y4oEkQKBgQDkrJycj5bATT/riqqV\nGA/xxnsF/1fLogjb5j35YJgRD5D2U5EJrYkXnKxhsgV62eFwceWW+HljVnqVlEqD\ngy6Kq9oXbv7xEvSc3k9PWQz63I1WqA0BYZLFUoqfnlPuqIAvQsOK2xoTobbclTGp\nWR7l1xivReBdQ2o1xzeKijqG3QKBgQCjhuETXrHp5KdugMcEl4NA73tHC/Mgb7qg\nghFfdE7ZjZj9JC+HAxn0u6UXzV63OFD5EQAl3ANmmw56k8QiflgLJVFSx/8c5NDU\nQ+x2Zj/vdvfRse8DWzR2k2cGT4aSRbpa6gAKO9PrLfqSQafDE45IskzRk+gTykyG\nMSmpES+EowKBgAVpbF9sKoYsjdm2M2lJ4362Us0GiP5hvFHv9gGD3rVwp96cha8z\n8y2i4JWDUAvjQimWGHflM4I9VrNZihXosd5ISOYLE2+DIlTgEgJvuhXpyFKHsZ8Z\nvw56cJtsdNIOHNKBgv0zSD+0sQ4xXbaDTG7mE0h6n9+1K7tQFqlpsg7lAoGAII9F\nl26+a/y8HbOEbPSiDLbiS+YkNawpc7YSMXheDtEzygt/bxl9/I20NIYOutp6vOzW\no7Mn9jEfc+aiIeAYNbfrdlkeAanJrsoLdhOr3UlJ1LXiCkAJtSZqWAZTnCJIFbwL\n3/3Dl0sjXiW2epAVP4JI613Q0sfv7rQxQFmMpZMCgYBy57Ky+9DuqdD16dUafVcD\nc3NAsUcq5tYcEieJTlVi1ynCRWo3xmDKmqh+yKNSj++IC2OqcnRi+Zh3c37cI2x/\ny7rnMlb88SyObuAqTQswBllzA7uTECe23y+w0wCrSrW9jdgwwyzR7rQfU9uTRkzo\nzhtODQDCcGTKNMBu5bRtxw==\n-----END PRIVATE KEY-----\n",
+  "client_email": "newsfeedforhybridcloud@appspot.gserviceaccount.com",
+  "client_id": "109929375635357133224",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/newsfeedforhybridcloud%40appspot.gserviceaccount.com"
+}

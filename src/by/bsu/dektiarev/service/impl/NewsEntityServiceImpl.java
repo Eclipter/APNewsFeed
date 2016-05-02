@@ -1,7 +1,8 @@
-package by.bsu.dektiarev.dao.service;
+package by.bsu.dektiarev.service.impl;
 
-import by.bsu.dektiarev.dao.enums.NewsEntity;
-import by.bsu.dektiarev.dao.repository.NewsEntityRepository;
+import by.bsu.dektiarev.entity.NewsEntity;
+import by.bsu.dektiarev.repository.NewsEntityRepository;
+import by.bsu.dektiarev.service.NewsEntityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

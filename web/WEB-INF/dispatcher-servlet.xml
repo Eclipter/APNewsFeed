@@ -28,11 +28,11 @@
         <property name="password" value="${password}"/>
     </bean>
 
-    <jpa:repositories base-package="by.bsu.dektiarev.dao.repository"/>
+    <jpa:repositories base-package="by.bsu.dektiarev.repository"/>
 
     <bean id="entityManagerFactory"
           class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="packagesToScan" value="by.bsu.dektiarev.dao"/>
+        <property name="packagesToScan" value="by.bsu.dektiarev"/>
         <property name="persistenceUnitName" value="entityManager"/>
         <property name="dataSource" ref="dataSource"/>
         <property name="jpaVendorAdapter" ref="jpaVendorAdapter"/>

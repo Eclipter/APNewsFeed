@@ -1,6 +1,6 @@
-package by.bsu.dektiarev.dao.service;
+package by.bsu.dektiarev.service;
 
-import by.bsu.dektiarev.dao.enums.NewsEntity;
+import by.bsu.dektiarev.entity.NewsEntity;
 
 import java.util.List;
 

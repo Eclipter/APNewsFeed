@@ -1,4 +1,4 @@
-package by.bsu.dektiarev.dao.enums;
+package by.bsu.dektiarev.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

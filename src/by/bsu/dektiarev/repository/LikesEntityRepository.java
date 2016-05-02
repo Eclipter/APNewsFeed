@@ -1,6 +1,6 @@
-package by.bsu.dektiarev.dao.repository;
+package by.bsu.dektiarev.repository;
 
-import by.bsu.dektiarev.dao.enums.LikesEntity;
+import by.bsu.dektiarev.entity.LikesEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

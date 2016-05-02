@@ -1,7 +1,8 @@
-package by.bsu.dektiarev.dao.service;
+package by.bsu.dektiarev.service.impl;
 
-import by.bsu.dektiarev.dao.enums.ViewsEntity;
-import by.bsu.dektiarev.dao.repository.ViewsEntityRepository;
+import by.bsu.dektiarev.entity.ViewsEntity;
+import by.bsu.dektiarev.repository.ViewsEntityRepository;
+import by.bsu.dektiarev.service.ViewsEntityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

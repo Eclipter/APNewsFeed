@@ -1,7 +1,8 @@
-package by.bsu.dektiarev.dao.service;
+package by.bsu.dektiarev.service.impl;
 
-import by.bsu.dektiarev.dao.enums.LikesEntity;
-import by.bsu.dektiarev.dao.repository.LikesEntityRepository;
+import by.bsu.dektiarev.entity.LikesEntity;
+import by.bsu.dektiarev.repository.LikesEntityRepository;
+import by.bsu.dektiarev.service.LikesEntityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
