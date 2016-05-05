@@ -1,18 +1,20 @@
 package by.bsu.dektiarev.controller;
 
 import by.bsu.dektiarev.entity.NewsEntity;
+import by.bsu.dektiarev.entity.NewsViewEntity;
 import by.bsu.dektiarev.service.LikesEntityService;
 import by.bsu.dektiarev.service.NewsEntityService;
 import by.bsu.dektiarev.service.StorageService;
 import by.bsu.dektiarev.service.ViewsEntityService;
-import com.google.api.services.storage.model.Bucket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,32 +35,28 @@ public class FeedController {
     @Autowired
     private StorageService storageService;
 
-    public String getImageFromBucket() {
-        try {
-            Bucket bucket = storageService.getBucket("newsfeed_data");
-            return bucket.getLocation();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (GeneralSecurityException e) {
-            e.printStackTrace();
+    public List<NewsViewEntity> getNews() {
+        List<NewsEntity> entityList = newsEntityService.getAll();
+        List<NewsViewEntity> newsViewEntities = new ArrayList<>();
+        for(NewsEntity newsEntity : entityList) {
+            try {
+                newsViewEntities.add(storageService.convertNewsEntity(newsEntity));
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (GeneralSecurityException e) {
+                e.printStackTrace();
+            }
         }
-        return "Error123";
+        return newsViewEntities;
     }
 
-    @RequestMapping(value = "/")
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView index() {
         ModelAndView modelAndView = new ModelAndView("index");
 
-        List<NewsEntity> entityList = newsEntityService.getAll();
-        String imagePath = entityList.get(0).getImagePath();
+        List<NewsViewEntity> newsViewEntities = getNews();
 
-        String message = "Running FeedController.index() method";
-
-        String imageFromBucket = getImageFromBucket();
-
-        modelAndView.addObject("bucket", imageFromBucket);
-        modelAndView.addObject("message", message);
-        modelAndView.addObject("imagePath", imagePath);
+        modelAndView.addObject("newsList", newsViewEntities);
         return modelAndView;
     }
 }
