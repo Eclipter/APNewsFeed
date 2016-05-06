@@ -1,11 +1,11 @@
-package by.bsu.dektiarev.controller;
+package domain.bsu.dektiarev.controller;
 
-import by.bsu.dektiarev.entity.NewsEntity;
-import by.bsu.dektiarev.entity.NewsViewEntity;
-import by.bsu.dektiarev.service.LikesEntityService;
-import by.bsu.dektiarev.service.NewsEntityService;
-import by.bsu.dektiarev.service.StorageService;
-import by.bsu.dektiarev.service.ViewsEntityService;
+import domain.bsu.dektiarev.entity.NewsEntity;
+import domain.bsu.dektiarev.entity.NewsViewEntity;
+import domain.bsu.dektiarev.service.LikesEntityService;
+import domain.bsu.dektiarev.service.NewsEntityService;
+import domain.bsu.dektiarev.service.StorageService;
+import domain.bsu.dektiarev.service.ViewsEntityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,6 +48,11 @@ public class FeedController {
             }
         }
         return newsViewEntities;
+    }
+
+    @RequestMapping(value = "/", method = RequestMethod.POST)
+    public void doPost() {
+
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)

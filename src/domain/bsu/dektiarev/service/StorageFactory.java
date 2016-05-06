@@ -1,4 +1,4 @@
-package by.bsu.dektiarev.service;
+package domain.bsu.dektiarev.service;
 /*
  * Copyright 2016 Google Inc. All Rights Reserved.
  *

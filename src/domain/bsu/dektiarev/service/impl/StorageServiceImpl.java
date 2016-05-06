@@ -1,15 +1,17 @@
-package by.bsu.dektiarev.service.impl;
+package domain.bsu.dektiarev.service.impl;
 
-import by.bsu.dektiarev.entity.NewsEntity;
-import by.bsu.dektiarev.entity.NewsViewEntity;
-import by.bsu.dektiarev.service.StorageFactory;
-import by.bsu.dektiarev.service.StorageService;
 import com.google.api.client.http.InputStreamContent;
 import com.google.api.services.storage.Storage;
 import com.google.api.services.storage.model.Bucket;
 import com.google.api.services.storage.model.ObjectAccessControl;
 import com.google.api.services.storage.model.Objects;
 import com.google.api.services.storage.model.StorageObject;
+import domain.bsu.dektiarev.entity.NewsEntity;
+import domain.bsu.dektiarev.entity.NewsViewEntity;
+import domain.bsu.dektiarev.repository.LikesEntityRepository;
+import domain.bsu.dektiarev.service.StorageFactory;
+import domain.bsu.dektiarev.service.StorageService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
@@ -23,6 +25,9 @@ import java.util.List;
  */
 @Service
 public class StorageServiceImpl implements StorageService {
+
+    @Autowired
+    private LikesEntityRepository likesEntityRepository;
 
     @Override
     public Bucket getBucket(String bucketName) throws IOException, GeneralSecurityException {

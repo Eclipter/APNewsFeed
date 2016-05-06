@@ -1,6 +1,6 @@
-package by.bsu.dektiarev.repository;
+package domain.bsu.dektiarev.repository;
 
-import by.bsu.dektiarev.entity.NewsEntity;
+import domain.bsu.dektiarev.entity.NewsEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

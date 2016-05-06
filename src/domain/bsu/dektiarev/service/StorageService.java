@@ -1,7 +1,7 @@
-package by.bsu.dektiarev.service;
+package domain.bsu.dektiarev.service;
 
-import by.bsu.dektiarev.entity.NewsEntity;
-import by.bsu.dektiarev.entity.NewsViewEntity;
+import domain.bsu.dektiarev.entity.NewsEntity;
+import domain.bsu.dektiarev.entity.NewsViewEntity;
 import com.google.api.services.storage.model.Bucket;
 import com.google.api.services.storage.model.StorageObject;
 

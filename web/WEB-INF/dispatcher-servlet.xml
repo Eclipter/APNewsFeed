@@ -28,11 +28,11 @@
         <property name="password" value="${password}"/>
     </bean>
 
-    <jpa:repositories base-package="by.bsu.dektiarev.repository"/>
+    <jpa:repositories base-package="domain.bsu.dektiarev.repository"/>
 
     <bean id="entityManagerFactory"
           class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="packagesToScan" value="by.bsu.dektiarev"/>
+        <property name="packagesToScan" value="domain.bsu.dektiarev"/>
         <property name="persistenceUnitName" value="entityManager"/>
         <property name="dataSource" ref="dataSource"/>
         <property name="jpaVendorAdapter" ref="jpaVendorAdapter"/>
@@ -60,7 +60,7 @@
 
     <mvc:annotation-driven/>
 
-    <context:component-scan base-package="by.bsu.dektiarev"/>
+    <context:component-scan base-package="domain.bsu.dektiarev"/>
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/feed/"/>

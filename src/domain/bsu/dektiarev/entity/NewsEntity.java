@@ -1,4 +1,4 @@
-package by.bsu.dektiarev.entity;
+package domain.bsu.dektiarev.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

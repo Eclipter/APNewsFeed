@@ -1,8 +1,8 @@
-package by.bsu.dektiarev.service.impl;
+package domain.bsu.dektiarev.service.impl;
 
-import by.bsu.dektiarev.entity.NewsEntity;
-import by.bsu.dektiarev.repository.NewsEntityRepository;
-import by.bsu.dektiarev.service.NewsEntityService;
+import domain.bsu.dektiarev.entity.NewsEntity;
+import domain.bsu.dektiarev.repository.NewsEntityRepository;
+import domain.bsu.dektiarev.service.NewsEntityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

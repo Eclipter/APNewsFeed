@@ -1,4 +1,4 @@
-package by.bsu.dektiarev.entity;
+package domain.bsu.dektiarev.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -8,8 +8,8 @@ import java.util.Objects;
  * Created by USER on 31.03.2016.
  */
 @Entity
-@Table(name = "views", schema = "newsdb")
-public class ViewsEntity implements Serializable {
+@Table(name = "likes", schema = "newsdb")
+public class LikesEntity implements Serializable {
 
     private static final long serialVersionUID = 1148903404164551073L;
 
@@ -21,8 +21,8 @@ public class ViewsEntity implements Serializable {
     @OneToOne
     private NewsEntity newsByNewsId;
 
-    @Column(name = "q_views")
-    private Integer viewsCount;
+    @Column(name = "q_likes")
+    private Integer likesCount;
 
     public Integer getNewsEntityId() {
         return newsEntityId;
@@ -40,33 +40,33 @@ public class ViewsEntity implements Serializable {
         this.newsByNewsId = newsByNewsId;
     }
 
-    public Integer getViewsCount() {
-        return viewsCount;
+    public Integer getLikesCount() {
+        return likesCount;
     }
 
-    public void setViewsCount(Integer viewsCount) {
-        this.viewsCount = viewsCount;
+    public void setLikesCount(Integer likesCount) {
+        this.likesCount = likesCount;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof ViewsEntity)) return false;
-        ViewsEntity that = (ViewsEntity) o;
+        if (!(o instanceof LikesEntity)) return false;
+        LikesEntity that = (LikesEntity) o;
         return Objects.equals(getNewsByNewsId(), that.getNewsByNewsId()) &&
-                Objects.equals(getViewsCount(), that.getViewsCount());
+                Objects.equals(getLikesCount(), that.getLikesCount());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getNewsByNewsId(), getViewsCount());
+        return Objects.hash(getNewsByNewsId(), getLikesCount());
     }
 
     @Override
     public String toString() {
         return "LikesEntity{" +
                 "newsByNewsId=" + newsByNewsId +
-                ", viewsCount=" + viewsCount +
+                ", likesCount=" + likesCount +
                 '}';
     }
 }

@@ -1,6 +1,6 @@
-package by.bsu.dektiarev.service;
+package domain.bsu.dektiarev.service;
 
-import by.bsu.dektiarev.entity.NewsEntity;
+import domain.bsu.dektiarev.entity.NewsEntity;
 
 import java.util.List;
 

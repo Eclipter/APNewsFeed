@@ -1,4 +1,4 @@
-package by.bsu.dektiarev.entity;
+package domain.bsu.dektiarev.entity;
 
 /**
  * Created by USER on 05.05.2016.
@@ -48,4 +48,5 @@ public class NewsViewEntity {
     public void setId(Integer id) {
         this.id = id;
     }
+
 }
