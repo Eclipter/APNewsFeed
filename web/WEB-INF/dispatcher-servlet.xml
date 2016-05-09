@@ -21,6 +21,11 @@
         <property name="location" value="resources/db.properties"/>
     </bean>
 
+<!--
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+-->
+
     <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
         <property name="driverClass" value="${driver}"/>
         <property name="url" value="${url}"/>
@@ -63,6 +68,8 @@
     <context:component-scan base-package="domain.bsu.dektiarev"/>
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass"
+                  value="org.springframework.web.servlet.view.JstlView" />
         <property name="prefix" value="/WEB-INF/feed/"/>
         <property name="suffix" value=".jsp"/>
     </bean>

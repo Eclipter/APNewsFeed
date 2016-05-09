@@ -9,4 +9,5 @@ public interface LikesEntityService {
 
     LikesEntity addLikes(LikesEntity likesEntity);
     LikesEntity addOneLike(Integer id);
+    LikesEntity deleteOneLike(Integer id);
 }

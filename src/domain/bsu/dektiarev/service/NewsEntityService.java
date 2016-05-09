@@ -11,4 +11,5 @@ public interface NewsEntityService {
 
     NewsEntity addNews(NewsEntity newsEntity);
     List<NewsEntity> getAll();
+    long countNews();
 }

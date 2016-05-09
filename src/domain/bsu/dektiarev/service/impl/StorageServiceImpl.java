@@ -8,13 +8,14 @@ import com.google.api.services.storage.model.Objects;
 import com.google.api.services.storage.model.StorageObject;
 import domain.bsu.dektiarev.entity.NewsEntity;
 import domain.bsu.dektiarev.entity.NewsViewEntity;
-import domain.bsu.dektiarev.repository.LikesEntityRepository;
 import domain.bsu.dektiarev.service.StorageFactory;
 import domain.bsu.dektiarev.service.StorageService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,9 +26,6 @@ import java.util.List;
  */
 @Service
 public class StorageServiceImpl implements StorageService {
-
-    @Autowired
-    private LikesEntityRepository likesEntityRepository;
 
     @Override
     public Bucket getBucket(String bucketName) throws IOException, GeneralSecurityException {
@@ -66,16 +64,29 @@ public class StorageServiceImpl implements StorageService {
             throws IOException, GeneralSecurityException {
         InputStreamContent contentStream = new InputStreamContent(
                 contentType, new FileInputStream(file));
-        // Setting the length improves upload performance
         contentStream.setLength(file.length());
         StorageObject objectMetadata = new StorageObject()
-                // Set the destination object name
                 .setName(name)
-                // Set the access control list to publicly read-only
                 .setAcl(Arrays.asList(
                         new ObjectAccessControl().setEntity("allUsers").setRole("OWNER")));
 
-        // Do the insert
+        Storage client = StorageFactory.getService();
+        Storage.Objects.Insert insertRequest = client.objects().insert(
+                "newsfeed_data", objectMetadata, contentStream);
+
+        insertRequest.execute();
+    }
+
+    @Override
+    public void uploadImage(String name, InputStream inputStream) throws IOException, GeneralSecurityException {
+        InputStreamContent contentStream = new InputStreamContent(
+                "image/jpeg", inputStream);
+        /*contentStream.setLength(file.getSize());*/
+        StorageObject objectMetadata = new StorageObject()
+                .setName(name)
+                .setAcl(Arrays.asList(
+                        new ObjectAccessControl().setEntity("allUsers").setRole("OWNER")));
+
         Storage client = StorageFactory.getService();
         Storage.Objects.Insert insertRequest = client.objects().insert(
                 "newsfeed_data", objectMetadata, contentStream);
@@ -96,7 +107,7 @@ public class StorageServiceImpl implements StorageService {
         return getObjectByURL(imageURL);
     }
 
-    @Override
+    /*@Override
     public String getDescription(NewsEntity newsEntity) throws IOException, GeneralSecurityException {
         String url = newsEntity.getDescriptionPath();
         Storage client = StorageFactory.getService();
@@ -104,13 +115,13 @@ public class StorageServiceImpl implements StorageService {
         InputStream inputStream = getRequest.executeMediaAsInputStream();
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
         return bufferedReader.readLine();
-    }
+    }*/
 
     @Override
     public NewsViewEntity convertNewsEntity(NewsEntity newsEntity) throws IOException, GeneralSecurityException {
         Integer id = newsEntity.getId();
         String title = newsEntity.getTitle();
-        String description = getDescription(newsEntity);
+        String description = newsEntity.getDescription();
         String imageUrl = getImageByNewsEntity(newsEntity).getMediaLink();
         return new NewsViewEntity(id, title, imageUrl, description);
     }

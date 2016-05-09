@@ -1,5 +1,6 @@
 package domain.bsu.dektiarev.controller;
 
+import com.google.appengine.api.blobstore.*;
 import domain.bsu.dektiarev.entity.NewsEntity;
 import domain.bsu.dektiarev.entity.NewsViewEntity;
 import domain.bsu.dektiarev.service.LikesEntityService;
@@ -12,10 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by USER on 21.03.2016.
@@ -35,6 +39,8 @@ public class FeedController {
     @Autowired
     private StorageService storageService;
 
+    private BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
+
     public List<NewsViewEntity> getNews() {
         List<NewsEntity> entityList = newsEntityService.getAll();
         List<NewsViewEntity> newsViewEntities = new ArrayList<>();
@@ -50,9 +56,35 @@ public class FeedController {
         return newsViewEntities;
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST)
-    public void doPost() {
+    @RequestMapping(value = "/addNews", method = RequestMethod.POST)
+    public ModelAndView addNews(HttpServletRequest req, HttpServletResponse res) {
+        NewsEntity newsEntity = new NewsEntity();
 
+        int newsId = (int) newsEntityService.countNews() + 1;
+        String imagePath = "images/" + newsId + ".jpg";
+
+        String title = req.getParameter("title");
+        String description = req.getParameter("description");
+        newsEntity.setId(newsId);
+        newsEntity.setTitle(title);
+        newsEntity.setDescription(description);
+        newsEntity.setImagePath(imagePath);
+        newsEntityService.addNews(newsEntity);
+
+        Map<String, List<BlobKey>> blobInfos = blobstoreService.getUploads(req);
+        BlobKey key = blobInfos.get("image").get(0);
+
+        BlobstoreInputStream in;
+        try {
+            in = new BlobstoreInputStream(key);
+            storageService.uploadImage(imagePath, in);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (GeneralSecurityException e) {
+            e.printStackTrace();
+        }
+
+        return index();
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)

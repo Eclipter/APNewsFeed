@@ -1,9 +1,6 @@
 package domain.bsu.dektiarev.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -23,8 +20,8 @@ public class NewsEntity implements Serializable {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "description_path")
-    private String descriptionPath;
+    @Column(name = "description")
+    private String description;
 
     @Column(name = "image_path")
     private String imagePath;
@@ -45,12 +42,12 @@ public class NewsEntity implements Serializable {
         this.title = title;
     }
 
-    public String getDescriptionPath() {
-        return descriptionPath;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescriptionPath(String descriptionPath) {
-        this.descriptionPath = descriptionPath;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getImagePath() {
@@ -68,13 +65,13 @@ public class NewsEntity implements Serializable {
         NewsEntity that = (NewsEntity) o;
         return Objects.equals(getId(), that.getId()) &&
                 Objects.equals(getTitle(), that.getTitle()) &&
-                Objects.equals(getDescriptionPath(), that.getDescriptionPath()) &&
+                Objects.equals(getDescription(), that.getDescription()) &&
                 Objects.equals(getImagePath(), that.getImagePath());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getTitle(), getDescriptionPath(), getImagePath());
+        return Objects.hash(getId(), getTitle(), getDescription(), getImagePath());
     }
 
     @Override
@@ -82,7 +79,7 @@ public class NewsEntity implements Serializable {
         return "NewsEntity{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", descriptionPath='" + descriptionPath + '\'' +
+                ", description='" + description + '\'' +
                 ", imagePath='" + imagePath + '\'' +
                 '}';
     }

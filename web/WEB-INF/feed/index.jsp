@@ -1,12 +1,20 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ page import="com.google.appengine.api.blobstore.BlobstoreServiceFactory" %>
+<%@ page import="com.google.appengine.api.blobstore.BlobstoreService" %>
+<%
+    BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
+%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Simple news feed</title>
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../../css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="../../css/style.css" rel="stylesheet"/>
+    <link href="../../css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="../../js/fileinput.js" type="text/javascript"></script>
+    <script src="../../js/fileinput_locale_ru.js" type="text/javascript"></script>
     <script src="../../js/bootstrap.min.js"></script>
     <script>
         $(document).ready(function () {
@@ -24,12 +32,16 @@
                     $(this).css("background-position", "left");
                 }
             });
+            $('#inputImage').fileinput({
+                showUpload : false,
+                allowedFileExtensions : ['jpg', 'png','gif']
+            });
         });
     </script>
 </head>
 <style>
     body {
-        background: url(../../resources/newspaper.jpg) no-repeat;
+        background: url(../../img/newspaper.jpg) no-repeat;
         background-size: cover;
     }
 </style>
@@ -46,6 +58,38 @@
         </ul>
     </div>
 </nav>
+<div id="addNewsModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add news</h4>
+            </div>
+            <form action="<%= blobstoreService.createUploadUrl("/addNews")%>" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="inputTitle">Title</label>
+                        <input type="text" name="title" class="form-control" id="inputTitle" placeholder="Title"
+                               required="">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputDescription">Description</label>
+                    <textarea name="description" rows="7" class="form-control" id="inputDescription"
+                              required=""></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputImage">Image</label>
+                        <input id="inputImage" type="file" name="image" >
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="reset" class="btn btn-default">Reset</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <div class="container">
     <div class="row">
         <c:forEach var="news" items="${newsList}">

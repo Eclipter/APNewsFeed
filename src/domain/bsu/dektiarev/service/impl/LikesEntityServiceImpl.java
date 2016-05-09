@@ -33,4 +33,14 @@ public class LikesEntityServiceImpl implements LikesEntityService {
         likesEntityRepository.addOneLike(id);
         return likesEntityRepository.findOne(id);
     }
+
+    @Override
+    public LikesEntity deleteOneLike(Integer id) {
+        if(likesEntityRepository.exists(id)) {
+            likesEntityRepository.deleteOneLike(id);
+        }
+        return likesEntityRepository.findOne(id);
+    }
+
+
 }

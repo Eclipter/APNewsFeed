@@ -11,4 +11,7 @@ public interface LikesEntityRepository extends JpaRepository<LikesEntity, Intege
 
     @Query("UPDATE domain.bsu.dektiarev.entity.LikesEntity l SET l.likesCount = l.likesCount + 1 WHERE l.newsEntityId = :id")
     void addOneLike(Integer id);
+
+    @Query("UPDATE domain.bsu.dektiarev.entity.LikesEntity l SET l.likesCount = l.likesCount - 1 WHERE l.newsEntityId = :id")
+    void deleteOneLike(Integer id);
 }

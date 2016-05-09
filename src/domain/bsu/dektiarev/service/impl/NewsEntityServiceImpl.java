@@ -25,6 +25,11 @@ public class NewsEntityServiceImpl implements NewsEntityService {
 
     @Override
     public List<NewsEntity> getAll() {
-        return newsEntityRepository.findAll();
+        return newsEntityRepository.findAllByOrderByIdDesc();
+    }
+
+    @Override
+    public long countNews() {
+        return newsEntityRepository.count();
     }
 }
