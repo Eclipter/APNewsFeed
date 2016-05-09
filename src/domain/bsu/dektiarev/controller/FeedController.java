@@ -41,7 +41,7 @@ public class FeedController {
 
     private BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
 
-    public List<NewsViewEntity> getNews() {
+    private List<NewsViewEntity> getNews() {
         List<NewsEntity> entityList = newsEntityService.getAll();
         List<NewsViewEntity> newsViewEntities = new ArrayList<>();
         for(NewsEntity newsEntity : entityList) {
@@ -49,11 +49,22 @@ public class FeedController {
                 newsViewEntities.add(storageService.convertNewsEntity(newsEntity));
             } catch (IOException e) {
                 e.printStackTrace();
+                return new ArrayList<>();
             } catch (GeneralSecurityException e) {
                 e.printStackTrace();
+                return new ArrayList<>();
             }
         }
         return newsViewEntities;
+    }
+
+    private ModelAndView onError() {
+        ModelAndView modelAndView = new ModelAndView("index");
+
+        List<NewsViewEntity> newsViewEntities = new ArrayList<>();
+
+        modelAndView.addObject("newsList", newsViewEntities);
+        return modelAndView;
     }
 
     @RequestMapping(value = "/addNews", method = RequestMethod.POST)
@@ -72,11 +83,10 @@ public class FeedController {
         newsEntityService.addNews(newsEntity);
 
         Map<String, List<BlobKey>> blobInfos = blobstoreService.getUploads(req);
-        BlobKey key = blobInfos.get("image").get(0);
+        BlobKey key = blobInfos.get("image").get(blobInfos.size() - 1);
 
-        BlobstoreInputStream in;
         try {
-            in = new BlobstoreInputStream(key);
+            BlobstoreInputStream in = new BlobstoreInputStream(key);
             storageService.uploadImage(imagePath, in);
         } catch (IOException e) {
             e.printStackTrace();
@@ -85,6 +95,18 @@ public class FeedController {
         }
 
         return index();
+    }
+
+    @RequestMapping(value = "/like", method = RequestMethod.POST)
+    public void like(HttpServletRequest req) {
+        Integer newsId = Integer.valueOf(req.getParameter("newsId"));
+        likesEntityService.addOneLike(newsId);
+    }
+
+    @RequestMapping(value = "/dislike", method = RequestMethod.POST)
+    public void dislike(HttpServletRequest req) {
+        Integer newsId = Integer.valueOf(req.getParameter("newsId"));
+        likesEntityService.deleteOneLike(newsId);
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)

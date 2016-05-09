@@ -38,6 +38,5 @@
     <orderEntry type="library" name="com.google.apis:google-api-services-storage:v1-rev39-1.20.0" level="project" />
     <orderEntry type="library" name="com.google.api-client:google-api-client-appengine:1.20.0" level="project" />
     <orderEntry type="library" name="javax.servlet:jstl:1.1.2" level="project" />
-    <orderEntry type="library" name="com.google.appengine.tools:appengine-gcs-client:0.6" level="project" />
   </component>
 </module>

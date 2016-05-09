@@ -12,8 +12,6 @@ import domain.bsu.dektiarev.service.StorageFactory;
 import domain.bsu.dektiarev.service.StorageService;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.GeneralSecurityException;
@@ -57,24 +55,6 @@ public class StorageServiceImpl implements StorageService {
         } while (null != objects.getNextPageToken());
 
         return results;
-    }
-
-    @Override
-    public void uploadFile(String name, String contentType, File file)
-            throws IOException, GeneralSecurityException {
-        InputStreamContent contentStream = new InputStreamContent(
-                contentType, new FileInputStream(file));
-        contentStream.setLength(file.length());
-        StorageObject objectMetadata = new StorageObject()
-                .setName(name)
-                .setAcl(Arrays.asList(
-                        new ObjectAccessControl().setEntity("allUsers").setRole("OWNER")));
-
-        Storage client = StorageFactory.getService();
-        Storage.Objects.Insert insertRequest = client.objects().insert(
-                "newsfeed_data", objectMetadata, contentStream);
-
-        insertRequest.execute();
     }
 
     @Override
