@@ -27,18 +27,14 @@
                 if (D === 'like') {
                     $.post(
                             "/like",
-                            {
-                                newsId: messageID
-                            }
+                            { newsId: messageID }
                     );
                     $(this).addClass("heartAnimation").attr("rel", "unlike");
                 }
                 else {
                     $.post(
                             "/dislike",
-                            {
-                                newsId: messageID
-                            }
+                            { newsId: messageID }
                     );
                     $(this).removeClass("heartAnimation").attr("rel", "like");
                     $(this).css("background-position", "left");
@@ -46,7 +42,8 @@
             });
             $('#inputImage').fileinput({
                 showUpload: false,
-                allowedFileExtensions: ['jpg']
+                allowedFileExtensions: ['jpg'],
+                minFileCount: 1
             });
         });
     </script>
