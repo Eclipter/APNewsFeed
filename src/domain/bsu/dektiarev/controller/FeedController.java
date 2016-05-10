@@ -109,6 +109,12 @@ public class FeedController {
         likesEntityService.deleteOneLike(newsId);
     }
 
+    @RequestMapping(value = "/addView", method = RequestMethod.POST)
+    public void addView(HttpServletRequest req) {
+        Integer newsId = Integer.valueOf(req.getParameter("newsId"));
+        viewsEntityService.addOneView(newsId);
+    }
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView index() {
         ModelAndView modelAndView = new ModelAndView("index");

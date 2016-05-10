@@ -22,14 +22,14 @@
                 var A = $(this).attr("id");
                 var B = A.split("like");
                 var messageID = B[1];
-                $(this).css("background-position", "")
+                $(this).css("background-position", "");
                 var D = $(this).attr("rel");
                 if (D === 'like') {
                     $.post(
                             "/like",
                             { newsId: messageID }
                     );
-                    $(this).addClass("heartAnimation").attr("rel", "unlike");
+                    $(this).addClass("heartAnimation").attr("rel", "dislike");
                 }
                 else {
                     $.post(
@@ -38,6 +38,18 @@
                     );
                     $(this).removeClass("heartAnimation").attr("rel", "like");
                     $(this).css("background-position", "left");
+                }
+            });
+            $('body').on('click', '.panel-heading', function () {
+                var idStr = $(this).attr("id");
+                var ID = idStr.split("collapseHeader")[1];
+                var wasViewed = $(this).attr("rel");
+                if(wasViewed === 'noView') {
+                    $.post(
+                            "/addView",
+                            { newsId: ID }
+                    );
+                    $(this).attr("rel", "view");
                 }
             });
             $('#inputImage').fileinput({
@@ -50,8 +62,7 @@
 </head>
 <style>
     body {
-        background: url(../../img/newspaper.jpg) no-repeat;
-        background-size: cover;
+        background: url(../../img/newspaper.jpg);
     }
 </style>
 <body>
@@ -102,20 +113,25 @@
 </div>
 <div class="container">
     <div class="row">
-        <c:forEach var="news" items="${newsList}">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h2>${news.title}</h2>
-                </div>
-                <div class="panel-body">
-                    <img src="${news.imageUrl}" style="max-width: 400px; max-height: 400px">
-                    <h4>${news.description}</h4>
-                    <div class="feed" id="feed${news.id}">
-                        <div class="heart" id="like${news.id}" rel="like"></div>
+        <div class="panel-group">
+            <c:forEach var="news" items="${newsList}">
+                <div class="panel panel-default">
+                    <div class="panel-heading" id="collapseHeader${news.id}" rel="noView"
+                         data-toggle="collapse" href="#collapse${news.id}">
+                        <h2>${news.title}</h2>
+                    </div>
+                    <div class="panel-body">
+                        <img src="${news.imageUrl}" style="max-width: 400px; max-height: 400px">
+                        <div class="panel-collapse collapse" id="collapse${news.id}">
+                            <h4 class="description">${news.description}</h4>
+                            <div class="feed" id="feed${news.id}">
+                                <div class="heart" id="like${news.id}" rel="like"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </c:forEach>
+            </c:forEach>
+        </div>
     </div>
 </div>
 </body>
