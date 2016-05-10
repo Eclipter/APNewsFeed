@@ -87,22 +87,16 @@ public class StorageServiceImpl implements StorageService {
         return getObjectByURL(imageURL);
     }
 
-    /*@Override
-    public String getDescription(NewsEntity newsEntity) throws IOException, GeneralSecurityException {
-        String url = newsEntity.getDescriptionPath();
-        Storage client = StorageFactory.getService();
-        Storage.Objects.Get getRequest = client.objects().get("newsfeed_data", url);
-        InputStream inputStream = getRequest.executeMediaAsInputStream();
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-        return bufferedReader.readLine();
-    }*/
-
     @Override
-    public NewsViewEntity convertNewsEntity(NewsEntity newsEntity) throws IOException, GeneralSecurityException {
-        Integer id = newsEntity.getId();
-        String title = newsEntity.getTitle();
-        String description = newsEntity.getDescription();
-        String imageUrl = getImageByNewsEntity(newsEntity).getMediaLink();
-        return new NewsViewEntity(id, title, imageUrl, description);
+    public List<NewsViewEntity> convertNewsEntities(List<NewsEntity> newsEntities) throws IOException, GeneralSecurityException {
+        List<NewsViewEntity> newsViewEntities = new ArrayList<>();
+        for(NewsEntity newsEntity : newsEntities) {
+            Integer id = newsEntity.getId();
+            String title = newsEntity.getTitle();
+            String description = newsEntity.getDescription();
+            String imageUrl = getImageByNewsEntity(newsEntity).getMediaLink();
+            newsViewEntities.add(new NewsViewEntity(id, title, imageUrl, description));
+        }
+        return newsViewEntities;
     }
 }

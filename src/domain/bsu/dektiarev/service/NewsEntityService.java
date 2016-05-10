@@ -10,6 +10,6 @@ import java.util.List;
 public interface NewsEntityService {
 
     NewsEntity addNews(NewsEntity newsEntity);
-    List<NewsEntity> getAll();
+    List<NewsEntity> getAllOrderByDesc();
     long countNews();
 }

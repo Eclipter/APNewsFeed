@@ -19,6 +19,6 @@ public interface StorageService {
     List<StorageObject> listBucket(String bucketName) throws IOException, GeneralSecurityException;
     StorageObject getObjectByURL(String url) throws IOException, GeneralSecurityException;
     StorageObject getImageByNewsEntity(NewsEntity newsEntity) throws IOException, GeneralSecurityException;
-    NewsViewEntity convertNewsEntity(NewsEntity newsEntity) throws IOException, GeneralSecurityException;
+    List<NewsViewEntity> convertNewsEntities(List<NewsEntity> newsEntities) throws IOException, GeneralSecurityException;
     void uploadImage(String name, InputStream inputStream) throws IOException, GeneralSecurityException;
 }

@@ -16,18 +16,12 @@ public class ViewsEntityServiceImpl implements ViewsEntityService {
     private ViewsEntityRepository viewsEntityRepository;
 
     @Override
-    public ViewsEntity addViews(ViewsEntity viewsEntity) {
-        ViewsEntity savedEntity = viewsEntityRepository.saveAndFlush(viewsEntity);
-        return savedEntity;
-    }
-
-    @Override
     public ViewsEntity addOneView(Integer id) {
         if(!viewsEntityRepository.exists(id)) {
             ViewsEntity viewsEntity = new ViewsEntity();
             viewsEntity.setNewsEntityId(id);
             viewsEntity.setViewsCount(1);
-            return addViews(viewsEntity);
+            return viewsEntityRepository.saveAndFlush(viewsEntity);
         }
         viewsEntityRepository.addOneView(id);
         return viewsEntityRepository.findOne(id);

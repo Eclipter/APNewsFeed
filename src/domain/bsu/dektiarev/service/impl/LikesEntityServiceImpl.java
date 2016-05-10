@@ -15,20 +15,13 @@ public class LikesEntityServiceImpl implements LikesEntityService {
     @Autowired
     private LikesEntityRepository likesEntityRepository;
 
-
-    @Override
-    public LikesEntity addLikes(LikesEntity likesEntity) {
-        LikesEntity savedEntity = likesEntityRepository.saveAndFlush(likesEntity);
-        return savedEntity;
-    }
-
     @Override
     public LikesEntity addOneLike(Integer id) {
         if(!likesEntityRepository.exists(id)) {
             LikesEntity likesEntity = new LikesEntity();
             likesEntity.setNewsEntityId(id);
             likesEntity.setLikesCount(1);
-            return addLikes(likesEntity);
+            return likesEntityRepository.saveAndFlush(likesEntity);
         }
         likesEntityRepository.addOneLike(id);
         return likesEntityRepository.findOne(id);
