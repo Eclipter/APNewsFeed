@@ -4,4 +4,10 @@
     <version>1</version>
     <threadsafe>true</threadsafe>
     <use-google-connector-j>true</use-google-connector-j>
+    <system-properties>
+        <property name="ae-cloudsql.cloudsql-database-url"
+                  value="jdbc:google:mysql://newsfeedforhybridcloud:newsfeed-db/newsdb?user=eclipter&amp;password=root"/>
+        <property name="ae-cloudsql.local-database-url"
+                  value="jdbc:mysql://173.194.224.45:3306/newsdb?user=eclipter&amp;PASSWORD=root&amp;useSSL=false"/>
+    </system-properties>
 </appengine-web-app>

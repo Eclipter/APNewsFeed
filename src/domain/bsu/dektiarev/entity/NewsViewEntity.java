@@ -5,16 +5,29 @@ package domain.bsu.dektiarev.entity;
  */
 public class NewsViewEntity {
 
+    private static final int PREVIEW_LENGTH = 100;
     private Integer id;
     private String title;
     private String imageUrl;
     private String description;
+    private String preDescription;
 
     public NewsViewEntity(Integer id, String title, String imageUrl, String description) {
         this.id = id;
         this.title = title;
         this.imageUrl = imageUrl;
         this.description = description;
+        this.preDescription = description.length() >= PREVIEW_LENGTH ?
+                description.substring(0, PREVIEW_LENGTH - 1) + "..." :
+                description;
+    }
+
+    public String getPreDescription() {
+        return preDescription;
+    }
+
+    public void setPreDescription(String preDescription) {
+        this.preDescription = preDescription;
     }
 
     public String getTitle() {

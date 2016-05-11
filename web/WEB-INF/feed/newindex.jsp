@@ -58,7 +58,6 @@
                 minFileCount: 1
             });
         });
-
     </script>
 </head>
 <style>
@@ -115,32 +114,21 @@
 <div class="container">
     <div class="row">
         <div class="panel-group">
-            <div class="col-lg-8 col-lg-offset-2">
+            <div class="col-lg-10 col-lg-offset-1">
                 <c:forEach var="news" items="${newsList}">
                     <div class="panel panel-default">
-                        <div href="#" class="panel-heading" id="collapseHeader${news.id}" rel="noView"
-                             data-toggle="modal" data-target="#newsModal${news.id}">
+                        <div class="panel-heading" id="collapseHeader${news.id}" rel="noView"
+                             data-toggle="collapse" href="#collapse${news.id}">
                             <h2>${news.title}</h2>
                         </div>
-                        <div id="newsModal${news.id}" class="modal fade" role="article">
-                            <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h2>${news.title}</h2>
-                                    </div>
-                                    <div class="modal-body">
-                                        <img src="${news.imageUrl}" style="float: left;margin-right: 10px;max-width: 400px; max-height: 400px">
-                                        <h4 class="description">${news.description}</h4>
-                                        <div class="feed" id="feed${news.id}">
-                                            <div class="heart" id="like${news.id}" rel="like"></div>
-                                        </div>
-                                    </div>
+                        <div class="panel-body">
+                            <img src="${news.imageUrl}" style="max-width: 400px; max-height: 400px">
+                            <div class="panel-collapse collapse" id="collapse${news.id}">
+                                <h4 class="description">${news.description}</h4>
+                                <div class="feed" id="feed${news.id}">
+                                    <div class="heart" id="like${news.id}" rel="like"></div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="panel-body">
-                            <img src="${news.imageUrl}" style="float: left;margin-right: 10px;max-width: 300px; max-height: 300px">
-                            <h4 class="description">${news.preDescription}</h4>
                         </div>
                     </div>
                 </c:forEach>

@@ -49,7 +49,6 @@ public class StorageFactory {
         /*GoogleCredential credential = GoogleCredential.getApplicationDefault(transport, jsonFactory);*/
         GoogleCredential credential = GoogleCredential.fromStream(new FileInputStream("resources/APNewsFeed-7e0946ab6fb1.json"))
                 .createScoped(Collections.singleton(StorageScopes.DEVSTORAGE_READ_WRITE));
-
         if (credential.createScopedRequired()) {
             Collection<String> bigqueryScopes = StorageScopes.all();
             credential = credential.createScoped(bigqueryScopes);
