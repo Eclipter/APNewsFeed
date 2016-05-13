@@ -55,5 +55,10 @@ body{color: #333333}
     .likeCount{font-family: 'Georgia', Times, Times New Roman, serif; margin-top: 13px;margin-left: 28px;font-size: 16px;color: #999999}
 
     .description {
-        font-family: "Berlin Sans FB", serif;
+        font-family: "Arial", serif;
+    }
+
+    .title {
+        font-weight: bold;
+        font-family: "Arial", serif;
     }

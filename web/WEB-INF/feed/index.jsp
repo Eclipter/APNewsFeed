@@ -120,13 +120,13 @@
                     <div class="panel panel-default">
                         <div href="#" class="panel-heading" id="collapseHeader${news.id}" rel="noView"
                              data-toggle="modal" data-target="#newsModal${news.id}">
-                            <h2>${news.title}</h2>
+                            <h2 class="title">${news.title}</h2>
                         </div>
                         <div id="newsModal${news.id}" class="modal fade" role="article">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h2>${news.title}</h2>
+                                        <h2 class="title">${news.title}</h2>
                                     </div>
                                     <div class="modal-body">
                                         <img src="${news.imageUrl}" style="float: left;margin-right: 10px;max-width: 400px; max-height: 400px">
