@@ -23,11 +23,9 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.storage.Storage;
 import com.google.api.services.storage.StorageScopes;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.Collection;
-import java.util.Collections;
 
 /**
  * This class manages the details of creating a Storage service, including auth.
@@ -46,9 +44,9 @@ public class StorageFactory {
     private static Storage buildService() throws IOException, GeneralSecurityException {
         HttpTransport transport = GoogleNetHttpTransport.newTrustedTransport();
         JsonFactory jsonFactory = new JacksonFactory();
-        /*GoogleCredential credential = GoogleCredential.getApplicationDefault(transport, jsonFactory);*/
-        GoogleCredential credential = GoogleCredential.fromStream(new FileInputStream("resources/APNewsFeed-7e0946ab6fb1.json"))
-                .createScoped(Collections.singleton(StorageScopes.DEVSTORAGE_READ_WRITE));
+        GoogleCredential credential = GoogleCredential.getApplicationDefault(transport, jsonFactory);
+        /*GoogleCredential credential = GoogleCredential.fromStream(new FileInputStream("resources/APNewsFeed-7e0946ab6fb1.json"))
+                .createScoped(Collections.singleton(StorageScopes.DEVSTORAGE_READ_WRITE));*/
         if (credential.createScopedRequired()) {
             Collection<String> bigqueryScopes = StorageScopes.all();
             credential = credential.createScoped(bigqueryScopes);
