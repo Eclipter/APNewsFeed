@@ -12,6 +12,8 @@ import java.util.Objects;
 public class NewsEntity implements Serializable {
 
     private static final long serialVersionUID = 2748740682620967902L;
+    public static final int TITLE_LENGTH = 1000;
+    public static final int DESCRIPTION_LENGTH = 5000;
 
     @Id
     @Column(name = "id")

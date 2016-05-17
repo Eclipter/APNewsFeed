@@ -27,30 +27,31 @@
                 if (D === 'like') {
                     $.post(
                             "/like",
-                            { newsId: messageID }
+                            {newsId: messageID}
                     );
                     $(this).addClass("heartAnimation").attr("rel", "dislike");
                 }
                 else {
                     $.post(
                             "/dislike",
-                            { newsId: messageID }
+                            {newsId: messageID}
                     );
                     $(this).removeClass("heartAnimation").attr("rel", "like");
                     $(this).css("background-position", "left");
                 }
             });
-            $('body').on('click', '.panel-heading', function () {
-                var idStr = $(this).attr("id");
-                var ID = idStr.split("collapseHeader")[1];
-                var wasViewed = $(this).attr("rel");
-                if(wasViewed === 'noView') {
-                    $.post(
-                            "/addView",
-                            { newsId: ID }
-                    );
-                    $(this).attr("rel", "view");
-                }
+            $(".readmore").click(function() {
+                var newsId = $(this).attr("id").split("readMore")[1];
+                $.post(
+                        "/addView",
+                        {newsId: newsId}
+                );
+                document.getElementById('predescription' + newsId).style.display = "none";
+                var desc = document.getElementById('description' + newsId);
+                desc.style.display = "block";
+                $(this).parent().hide();
+                var likeContent = "<div class=\"feed\" id=\"feed$" + newsId + "\"><div class=\"heart\" id=\"like" + newsId + "\" rel=\"like\"></div></div>";
+                $("#description" + newsId).append(likeContent);
             });
             $('#inputImage').fileinput({
                 showUpload: false,
@@ -63,18 +64,20 @@
 </head>
 <style>
     body {
-        background: url(../../img/newspaper.jpg);
+        background: url(../../img/paper.png);
     }
 </style>
 <body>
-<nav class="navbar navbar-inverse navbar-static-top">
+<nav class="navbar navbar-default navbar-fixed-top navbar-semitransparent">
     <div class="container-fluid">
         <div class="navbar-header">
             <div class="navbar-brand">NEWS FEED FOR HYBRID CLOUD</div>
         </div>
         <ul class="nav navbar-nav">
             <li>
-                <a href="#" data-toggle="modal" data-target="#addNewsModal">Add news</a>
+                <button class="btn btn-info navbar-btn" href="#" data-toggle="modal" data-target="#addNewsModal">
+                    <span class="glyphicon glyphicon-plus"></span> Add news
+                </button>
             </li>
         </ul>
     </div>
@@ -91,13 +94,13 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="inputTitle">Title</label>
-                        <input type="text" name="title" class="form-control" id="inputTitle" placeholder="Title"
-                               required="">
+                        <input type="text" name="title" class="form-control" id="inputTitle" placeholder="Add title..."
+                               required>
                     </div>
                     <div class="form-group">
                         <label for="inputDescription">Description</label>
                     <textarea name="description" rows="7" class="form-control" id="inputDescription"
-                              required=""></textarea>
+                              placeholder="Add description..." required></textarea>
                     </div>
                     <div class="form-group">
                         <label for="inputImage">Image</label>
@@ -114,37 +117,25 @@
 </div>
 <div class="container">
     <div class="row">
-        <div class="panel-group">
-            <div class="col-lg-8 col-lg-offset-2">
-                <c:forEach var="news" items="${newsList}">
-                    <div class="panel panel-default">
-                        <div href="#" class="panel-heading" id="collapseHeader${news.id}" rel="noView"
-                             data-toggle="modal" data-target="#newsModal${news.id}">
-                            <h2 class="title">${news.title}</h2>
+        <div class="col-lg-8 col-lg-offset-4">
+            <div class="after-navbar"></div>
+            <c:forEach var="news" items="${newsList}">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <img src="${news.imageUrl}" class="newsImage img-responsive center-block">
+                        <div class="title">
+                            <h1>${news.title}</h1>
                         </div>
-                        <div id="newsModal${news.id}" class="modal fade" role="article">
-                            <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h2 class="title">${news.title}</h2>
-                                    </div>
-                                    <div class="modal-body">
-                                        <img src="${news.imageUrl}" style="float: left;margin-right: 10px;max-width: 400px; max-height: 400px">
-                                        <h4 class="description">${news.description}</h4>
-                                        <div class="feed" id="feed${news.id}">
-                                            <div class="heart" id="like${news.id}" rel="like"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div id="predescription${news.id}" class="predescription">
+                            ${news.preDescription}
                         </div>
-                        <div class="panel-body">
-                            <img src="${news.imageUrl}" style="float: left;margin-right: 10px;max-width: 300px; max-height: 300px">
-                            <h4 class="description">${news.preDescription}</h4>
+                        <a><img id="readMore${news.id}" class="readmore" src="../../img/readmore.jpg"></a>
+                        <div id="description${news.id}" class="description">
+                            ${news.description}
                         </div>
                     </div>
-                </c:forEach>
-            </div>
+                </div>
+            </c:forEach>
         </div>
     </div>
 </div>

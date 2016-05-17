@@ -58,6 +58,12 @@ public class FeedController {
 
         String title = req.getParameter("title");
         String description = req.getParameter("description");
+        if(title.length() > NewsEntity.TITLE_LENGTH) {
+            return onError("Title length must be less than 1000 characters.");
+        }
+        if(description.length() > NewsEntity.DESCRIPTION_LENGTH) {
+            return onError("Description length must be less than 5000 characters.");
+        }
         newsEntity.setId(newsId);
         newsEntity.setTitle(title);
         newsEntity.setDescription(description);
@@ -65,6 +71,9 @@ public class FeedController {
         newsEntityService.addNews(newsEntity);
 
         Map<String, List<BlobKey>> blobInfos = blobstoreService.getUploads(req);
+        if(blobInfos.get("image").size() == 0) {
+            return onError("Stop hacking my site!");
+        }
         BlobKey key = blobInfos.get("image").get(blobInfos.size() - 1);
 
         try {
@@ -76,7 +85,7 @@ public class FeedController {
             e.printStackTrace();
         }
 
-        return index();
+        return new ModelAndView("redirect:/");
     }
 
     @RequestMapping(value = "/like", method = RequestMethod.POST)
